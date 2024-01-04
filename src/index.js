@@ -12,11 +12,11 @@ const popupImage = document.querySelector('.popup_type_image');
 
 const popupClose = document.querySelector('.popup__close'); 
 
-const profileName = document.getElementById('name'); //берем имя из профиля страницы 
-const profileJob = document.getElementById('job'); //берем профессию из профиля страницы 
+const profileName = document.getElementById('name'); 
+const profileJob = document.getElementById('job');
 
-const inputName = document.getElementById('inputName'); //берем имя из инпут-формы 
-const inputJob = document.getElementById('inputJob'); //берем профессию из инпут-формы 
+const inputName = document.getElementById('inputName'); 
+const inputJob = document.getElementById('inputJob'); 
 
 const formElement = document.querySelector('.popup__form'); 
 
@@ -50,7 +50,7 @@ initialCards.forEach((item) => {
 })
 
 
-//----отправка редактирование профиля 
+// редактирование профиля 
 
 formElement.addEventListener('submit', function(evt) { 
   evt.preventDefault(); 
@@ -60,39 +60,16 @@ formElement.addEventListener('submit', function(evt) {
   formElement.reset(); 
 });  
 
-// ------отправка добавления карточек 
+// добавления карточек 
 
 formElementAdd.addEventListener('submit', function(ev) { 
   ev.preventDefault(); 
   closeModal(addCardModal); 
-  // const name = ev.target.querySelector('#formAddInputName').value; 
-  // const link = ev.target.querySelector('#formAddInputLink').value; 
+ 
   const cardData = createCard({name, link}, deleteCard); 
   addCard(cardData);
   formElementAdd.reset(); 
 });
-
-//---------------------------------- 
-// popupEdit.addEventListener('click', function(evt){ 
-//   if (evt.target.classList.contains('popup_type_edit') || evt.target.classList.contains('popup__close')){ 
-//     const popupOpened = document.querySelector('.popup_is-opened'); 
-//     closeModal(popupOpened); 
-//   } 
-// }) 
-
-// popupAddCard.addEventListener('click', function(evt){ 
-//   if (evt.target.classList.contains('popup_type_add-card') || evt.target.classList.contains('popup__close')){ 
-//     const popupOpened = document.querySelector('.popup_is-opened'); 
-//     closeModal(popupOpened); 
-//   }
-// }) 
-
-// popupImage.addEventListener('click', function(evt){ 
-//   if (evt.target.classList.contains('popup_type_image') || evt.target.classList.contains('popup__close')){ 
-//     const popupOpened = document.querySelector('.popup_is-opened'); 
-//     closeModal(popupOpened); 
-//   }
-// }) 
 
 const popupList = Array.from(document.querySelectorAll('.popup')); // найдем все попапы на странице
 
@@ -105,14 +82,14 @@ popupList.forEach((popup) => { // итерируем массив. объявл�
   })
 })
 
-//----открытие редактирования профиля 
+// редактирования профиля 
 openEditModalButton.addEventListener('click', () => { 
   inputName.value = profileName.textContent; 
   inputJob.value = profileJob.textContent; 
   openPopup(editModal); 
 }) 
 
-//-----открытие добавления карточек 
+// добавления карточек 
 openAddCardModalButton.addEventListener('click', () => { 
   openPopup(addCardModal); 
 })
