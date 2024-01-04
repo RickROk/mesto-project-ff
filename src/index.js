@@ -47,7 +47,7 @@ const link = document.querySelector('#formAddInputLink').value;
 initialCards.forEach((item) => {
   const cardData = createCard(item, deleteCard);
   addCard(cardData);
-});
+})
 
 
 //----отправка редактирование профиля 
@@ -64,12 +64,35 @@ formElement.addEventListener('submit', function(evt) {
 
 formElementAdd.addEventListener('submit', function(ev) { 
   ev.preventDefault(); 
-  closeModal(addCardModal);   
+  closeModal(addCardModal); 
+  // const name = ev.target.querySelector('#formAddInputName').value; 
+  // const link = ev.target.querySelector('#formAddInputLink').value; 
   const cardData = createCard({name, link}, deleteCard); 
   addCard(cardData);
   formElementAdd.reset(); 
 });
 
+//---------------------------------- 
+// popupEdit.addEventListener('click', function(evt){ 
+//   if (evt.target.classList.contains('popup_type_edit') || evt.target.classList.contains('popup__close')){ 
+//     const popupOpened = document.querySelector('.popup_is-opened'); 
+//     closeModal(popupOpened); 
+//   } 
+// }) 
+
+// popupAddCard.addEventListener('click', function(evt){ 
+//   if (evt.target.classList.contains('popup_type_add-card') || evt.target.classList.contains('popup__close')){ 
+//     const popupOpened = document.querySelector('.popup_is-opened'); 
+//     closeModal(popupOpened); 
+//   }
+// }) 
+
+// popupImage.addEventListener('click', function(evt){ 
+//   if (evt.target.classList.contains('popup_type_image') || evt.target.classList.contains('popup__close')){ 
+//     const popupOpened = document.querySelector('.popup_is-opened'); 
+//     closeModal(popupOpened); 
+//   }
+// }) 
 
 const popupList = Array.from(document.querySelectorAll('.popup')); // найдем все попапы на странице
 
