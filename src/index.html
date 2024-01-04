@@ -1,81 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Mesto</title>
-  
-</head>
-<body class="page">
-<div class="page__content">
-  <header class="header page__section">
-    <img src="./images/logo.svg" alt="Логотип проекта масто" class="logo header__logo">
-  </header>
-  <main class="content">
-    <section class="profile page__section">
-      <div class="profile__image" style="background-image: url('./images/avatar.jpg');"></div>
-      <div class="profile__info">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button" type="button"></button>
-        <p class="profile__description">Исследователь океана</p>
-      </div>
-      <button class="profile__add-button" type="button"></button>
-    </section>
-    <section class="places page__section">
-      <ul class="places__list">
-      </ul>
-    </section>
-  </main>
-  <footer class="footer page__section">
-    <p class="footer__copyright">
-      © 2021 Mesto Russia
-    </p>
-  </footer>
-  <div class="popup popup_type_edit">
-    <div class="popup__content">
-      <button type="button" class="popup__close"></button>
-      <h3 class="popup__title">Редактировать профиль</h3>
-      <form class="popup__form" name="edit-profile">
-        <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required>
-        <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" required>
-        <button type="submit" class="button popup__button">Сохранить</button>
-      </form>
-    </div>
-  </div>
-  <div class="popup popup_type_new-card">
-    <div class="popup__content">
-      <button type="button" class="popup__close"></button>
-      <h3 class="popup__title">Новое место</h3>
-      <form class="popup__form" name="new-place">
-        <input type="text" name="place-name" class="popup__input popup__input_type_card-name" placeholder="Название" required>
-        <input type="url" name="link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required>
-        <button type="submit" class="button popup__button">Сохранить</button>
-      </form>
-    </div>
-  </div>
-  <div class="popup popup_type_image">
-    <div class="popup__content popup__content_content_image">
-      <button type="button" class="popup__close"></button>
-      <img src="" alt="" class="popup__image">
-      <p class="popup__caption"></p>
-    </div>
-  </div>
-</div>
-<script src="./scripts/cards.js"></script>
-<script src="./scripts/index.js" defer></script>
 
-<template id="card-template">
-  <li class="places__item card">
-    <img class="card__image" src="" alt="" />
-    <button type="button" class="card__delete-button"></button>
-    <div class="card__description">
-      <h2 class="card__title">
-      </h2>
-      <button type="button" class="card__like-button"></button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="popup">
+      <div class="popup__container">
+        <h3 class="popup__title">Добавить товар</h3>
+        <form class="form" name="new" novalidate>
+          <input minlength="3" maxlength="10" type="text" autocomplete="off" name="name-card" class="form__input form__input_type_name" placeholder="Название" />
+          <span id="name-card-error" class="error"></span>
+          <input min="1" max="20" type="number" autocomplete="off" name="price" class="form__input form__input_type_price" placeholder="Цена" />
+          <span id="price-error" class="error"></span>
+          <input type="url" autocomplete="off" name="link" class="form__input form__input_type_link-url" placeholder="Ссылка на картинку" />
+          <span id="link-error" class="error"></span>
+          <button type="submit" class="button form__button form__button_add">
+            Добавить
+          </button>
+        </form>
+      </div>
     </div>
-  </li>
-</template>
+    <div class="popup">
+      <div class="popup__container">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form class="form" name="user" novalidate>
+          <input type="text" autocomplete="off" name="user-name" class="form__input" minlength="2" required placeholder="Имя" />
+          <span id="user-name-error" class="error"></span>
+          <input autocomplete="off" name="about" class="form__input" required minlength="2" placeholder="О себе" />
+          <span id="about-error" class="error"></span>
+          <input type="email" autocomplete="off" name="email" class="form__input" required placeholder="Email" />
+          <span id="email-error" class="error"></span>
+          <input autocomplete="off" type="tel" name="phone" class="form__input" pattern="(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?" placeholder="Введите телефон" title="Введите телефон в формате +7 999 999 99 99 или 8 999 999 99 99" />
+          <span id="phone-error" class="error"></span>
+          <button type="submit" class="button form__button form__button_add">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup">
+      <div class="popup__container">
+        <h3 class="popup__title">Регистрация</h3>
+        <form class="form" name="new" novalidate>
+          <input type="text" autocomplete="off" name="text" class="form__input form__input_type_name" minlength="8" required placeholder="Имя">
+          <span id="text-error" class="error"></span>
+
+          <section class="form__section">
+            <input type="password" autocomplete="off" name="password" class="form__input form__input_type_password" minlength="8" required placeholder="Пароль">
+            <span id="password-error" class="error"></span>
+            <button class="form__toggle-password" type="button" aria-label="Показать пароль как простой текст. Предупреждение: это покажет ваш пароль на экране.">
+              Показать пароль
+            </button>
+          </section>
+          <section class="form__section">
+            <input type="password" autocomplete="off" name="password-repeat" class="form__input form__input_type_password-repeat" minlength="8" required placeholder="Повторите пароль">
+            <span id="password-repeat-error" class="error"></span>
+            <button class="form__toggle-password" type="button" aria-label="Показать пароль как простой текст. Предупреждение: это покажет ваш пароль на экране.">
+              Показать пароль
+            </button>
+          </section>
+
+          <button type="submit" class="button form__button form__button_add"> Зарегистрироваться</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <form class="form-new" name="new" novalidate>
+    <input type="text" autocomplete="off" name="text" class="form__input form__input_type_name" minlength="8" required placeholder="Имя">
+    <span id="text-error" class="error"></span>
+
+    <section class="form__section">
+      <input type="password" autocomplete="off" name="password" class="form__input form__input_type_password" minlength="8" required placeholder="Пароль">
+      <span id="password-error" class="error"></span>
+      <button class="form__toggle-password" type="button" aria-label="Показать пароль как простой текст. Предупреждение: это покажет ваш пароль на экране.">
+        Показать пароль
+      </button>
+    </section>
+    <section class="form__section">
+      <input type="password" autocomplete="off" name="password-repeat" class="form__input form__input_type_password-repeat" minlength="8" required placeholder="Повторите пароль">
+      <span id="password-repeat-error" class="error"></span>
+      <button class="form__toggle-password" type="button" aria-label="Показать пароль как простой текст. Предупреждение: это покажет ваш пароль на экране.">
+        Показать пароль
+      </button>
+    </section>
+
+    <button type="submit" class="button form__button form__button_add"> Зарегистрироваться</button>
+  </form>
+  <script defer src="./scripts/index.js" defer></script>
+  <script defer src="./scripts/validation.js" defer></script>
 </body>
+
 </html>
