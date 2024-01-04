@@ -1,4 +1,6 @@
 import './styles/index.css';
+import './scripts/cards.js';
+
 // @todo: Темплейт карточки
 const places = document.querySelector('.places');
 const placeList = places.querySelector('.places__list');
