@@ -10,6 +10,8 @@ const popupEdit = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_new-card'); 
 const popupImage = document.querySelector('.popup_type_image'); 
 
+
+
 const popupClose = document.querySelector('.popup__close'); 
 
 const profileName = document.getElementById('name'); 
@@ -18,7 +20,7 @@ const profileJob = document.getElementById('job');
 const inputName = document.getElementById('inputName'); 
 const inputJob = document.getElementById('inputJob'); 
 
-const formElement = document.querySelector('.popup__form'); 
+const formElement = popup.querySelector('.popup__form'); 
 
 //modals 
 const editModal = document.querySelector('.popup_type_edit'); 
@@ -66,7 +68,9 @@ formElementAdd.addEventListener('submit', function(ev) {
   ev.preventDefault(); 
   closeModal(addCardModal); 
  
-  const cardData = createCard({name, link}, deleteCard); 
+  const nameInput = document.querySelector('#name');
+  const linkInput = document.querySelector('#link');
+  const cardData = createCard({name: nameInput.value, link: linkInput.value, alt: linkInput.alt}, deleteCard);
   addCard(cardData);
   formElementAdd.reset(); 
 });

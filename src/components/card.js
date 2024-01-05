@@ -12,7 +12,7 @@ function createCard(cardData, onDelete) {
   
     cardElement.querySelector('.card__title').textContent = cardData.name;
     const cardImage = cardElement.querySelector('.card__image');
-    cardImage.alt = cardData.name;
+    cardImage.alt = cardData.alt;
     cardImage.src = cardData.link;
   
     const deleteButton = cardElement.querySelector('.card__delete-button');
@@ -23,26 +23,26 @@ function createCard(cardData, onDelete) {
       evt.target.classList.toggle('card__like-button_is-active'); 
     })
   
-    const imgClickHandler = (evt) => {
-      popupImgPic.src = cardData.link;
-      popupImgText.textContent = cardData.name;
-      openPopup(imageModal) 
+    const handleImageClick = (evt) => {
+      popupImgPic.src = evt.target.src;
+      popupImgText.textContent = evt.target.alt;
+      openPopup(imageModal);
     } 
     
     cardImage.addEventListener('click', function(evt) { 
-      imgClickHandler(); 
+      handleImageClick(evt); 
     })
   
-    return cardElement;
-  }
+  return cardElement;
+}
   
-  function deleteCard(event) {
-    const cardListItem = event.target.closest('.card');
-    cardListItem.remove();
-  }
+function deleteCard(event) {
+  const cardListItem = event.target.closest('.card');
+  cardListItem.remove();
+}
   
-  function addCard(cardData) {
-    cardsContainer.prepend(cardData);
-  }
+function addCard(cardData) {
+  cardsContainer.prepend(cardData);
+}
 
 export {createCard, deleteCard, addCard};

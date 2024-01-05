@@ -5,7 +5,7 @@ function openPopup(modal) {
     document.addEventListener('keyup', handleEsc); 
   } 
 
-//------------------------ 
+
 function closeModal(popup) { 
     popup.classList.remove('popup_is-opened'); 
     document.removeEventListener('keyup', handleEsc); 
