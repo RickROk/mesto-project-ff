@@ -10,8 +10,6 @@ const popupEdit = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_new-card'); 
 const popupImage = document.querySelector('.popup_type_image'); 
 
-
-
 const popupClose = document.querySelector('.popup__close'); 
 
 const profileName = document.getElementById('name'); 
@@ -31,7 +29,7 @@ const imageModal = document.querySelector('.popup_type_image');
 const openEditModalButton= document.querySelector('.profile__edit-button');
 const openAddCardModalButton= document.querySelector('.profile__add-button');
 
-//close modal buttons 
+//modal buttons 
 const closeEditModalButton= editModal.querySelector('.popup__close');
 const closeAddCardModalButton= addCardModal.querySelector('.popup__close');
 const closeImageModalButton= imageModal.querySelector('.popup__close');
@@ -81,12 +79,12 @@ popupList.forEach((popup) => { // итерируем массив. объявл�
   popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
     const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
     if (targetClassList.contains('popup') || targetClassList.contains('popup__close')) { // проверяем наличие класса попапа ИЛИ кнопки закрытия
-      closeModal(popup); // если один из классов присутствует, то закрываем попап
+      closeModal(popup);
     }
   })
 })
 
-// редактирования профиля 
+//профиль
 openEditModalButton.addEventListener('click', () => { 
   inputName.value = profileName.textContent; 
   inputJob.value = profileJob.textContent; 
@@ -97,3 +95,4 @@ openEditModalButton.addEventListener('click', () => {
 openAddCardModalButton.addEventListener('click', () => { 
   openPopup(addCardModal); 
 })
+

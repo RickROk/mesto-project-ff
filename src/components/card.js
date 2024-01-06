@@ -1,46 +1,40 @@
-import {openPopup} from './modal';
+import {handleImageClick} from './modal';
 
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsContainer = document.querySelector('.places__list');
 
-const popupImgPic = document.querySelector('.popup__image');
-const popupImgText = document.querySelector('.popup__caption');
-const imageModal = document.querySelector('.popup_type_image');
-
 function createCard(cardData, onDelete) {
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  
-    cardElement.querySelector('.card__title').textContent = cardData.name;
-    const cardImage = cardElement.querySelector('.card__image');
-    cardImage.alt = cardData.alt;
-    cardImage.src = cardData.link;
-  
-    const deleteButton = cardElement.querySelector('.card__delete-button');
-    deleteButton.addEventListener('click', onDelete);
-    
-    const listItemLike = cardElement.querySelector('.card__like-button'); 
-    listItemLike.addEventListener('click', (evt) => { 
-      evt.target.classList.toggle('card__like-button_is-active'); 
-    })
-  
-    const handleImageClick = (evt) => {
-      popupImgPic.src = evt.target.src;
-      popupImgText.textContent = evt.target.alt;
-      openPopup(imageModal);
-    } 
-    
-    cardImage.addEventListener('click', function(evt) { 
-      handleImageClick(evt); 
-    })
-  
+  function handleLikeButtonClick(evt) {
+    evt.target.classList.toggle('card__like-button_is-active');
+  }
+
+  function handleCardImageClick(evt) {
+    handleImageClick(evt);
+  }
+
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+
+  cardElement.querySelector('.card__title').textContent = cardData.name;
+  const cardImage = cardElement.querySelector('.card__image');
+  cardImage.alt = `Фотография места ${cardData.name};`
+  cardImage.src = cardData.link;
+
+  const deleteButton = cardElement.querySelector('.card__delete-button');
+  deleteButton.addEventListener('click', onDelete);
+
+  const listItemLike = cardElement.querySelector('.card__like-button');
+  listItemLike.addEventListener('click', handleLikeButtonClick);
+
+  cardImage.addEventListener('click', handleCardImageClick);
+
   return cardElement;
 }
-  
+
 function deleteCard(event) {
   const cardListItem = event.target.closest('.card');
   cardListItem.remove();
 }
-  
+
 function addCard(cardData) {
   cardsContainer.prepend(cardData);
 }
