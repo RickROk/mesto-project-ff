@@ -1,26 +1,44 @@
 import './pages/index.css';
 import {initialCards} from './components/cards';
 import {openPopup, closeModal} from './components/modal';
-import {createCard, deleteCard, addCard} from './components/card';
+import {createCard, deleteCard} from './components/card';
 
 const showEditProfile = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup'); 
+const profilePopup = document.querySelector('.profile-popup');
+
+
+
+
+const popupImgPic = document.querySelector('.popup__image');
+const popupImgText = document.querySelector('.popup__caption');
+
+const handleImageClick = (evt) => {
+  popupImgPic.src = evt.target.src;
+  popupImgText.textContent = evt.target.alt;
+  openPopup(imageModal);
+} 
+
+function handleCardImageClick(evt) {
+  handleImageClick(evt);
+}
+
+
 
 const popupEdit = document.querySelector('.popup_type_edit'); 
 const popupAddCard = document.querySelector('.popup_type_new-card'); 
 const popupImage = document.querySelector('.popup_type_image'); 
 
 const popupClose = document.querySelector('.popup__close'); 
-
+const cardsContainer = document.querySelector('.places__list');
 const profileName = document.getElementById('name'); 
 const profileJob = document.getElementById('job');
 
 const inputName = document.getElementById('inputName'); 
 const inputJob = document.getElementById('inputJob'); 
+const popup = document.querySelector('.popup');
+const formElement = profilePopup.querySelector('.popup__form'); 
 
-const formElement = popup.querySelector('.popup__form'); 
-
-//modals 
+//modals
 const editModal = document.querySelector('.popup_type_edit'); 
 const addCardModal = document.querySelector('.popup_type_new-card');
 const imageModal = document.querySelector('.popup_type_image');
@@ -39,9 +57,8 @@ const popupAdd = document.querySelector('.popup-add');
 const formElementAdd = document.querySelector('#popup-add__form'); 
 const showImageAdd = document.querySelector('.profile__add'); 
 
-//input
-const name = document.querySelector('#formAddInputName').value; 
-const link = document.querySelector('#formAddInputLink').value; 
+
+
 
 
 initialCards.forEach((item) => {
@@ -96,3 +113,8 @@ openAddCardModalButton.addEventListener('click', () => {
   openPopup(addCardModal); 
 })
 
+function addCard(cardData) {
+  cardsContainer.prepend(cardData);
+}
+
+export{cardsContainer, handleCardImageClick};

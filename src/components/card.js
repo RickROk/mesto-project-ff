@@ -1,17 +1,11 @@
-import {handleImageClick} from './modal';
+import {handleCardImageClick} from '../index';
 
 const cardTemplate = document.querySelector('#card-template').content;
-const cardsContainer = document.querySelector('.places__list');
+function handleLikeButtonClick(evt) {
+  evt.target.classList.toggle('card__like-button_is-active');
+}
 
 function createCard(cardData, onDelete) {
-  function handleLikeButtonClick(evt) {
-    evt.target.classList.toggle('card__like-button_is-active');
-  }
-
-  function handleCardImageClick(evt) {
-    handleImageClick(evt);
-  }
-
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
   cardElement.querySelector('.card__title').textContent = cardData.name;
@@ -35,8 +29,6 @@ function deleteCard(event) {
   cardListItem.remove();
 }
 
-function addCard(cardData) {
-  cardsContainer.prepend(cardData);
-}
 
-export {createCard, deleteCard, addCard};
+
+export {createCard, deleteCard};
