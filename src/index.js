@@ -3,39 +3,26 @@ import {initialCards} from './components/cards';
 import {openPopup, closeModal} from './components/modal';
 import {createCard, deleteCard} from './components/card';
 
-const showEditProfile = document.querySelector('.profile__edit-button');
+const nameInput = document.querySelector('#name');
+const linkInput = document.querySelector('#link');
 const profilePopup = document.querySelector('.profile-popup');
-
-
-
-
 const popupImgPic = document.querySelector('.popup__image');
 const popupImgText = document.querySelector('.popup__caption');
-
 const handleImageClick = (evt) => {
   popupImgPic.src = evt.target.src;
   popupImgText.textContent = evt.target.alt;
   openPopup(imageModal);
 } 
 
-function handleCardImageClick(evt) {
-  handleImageClick(evt);
-}
+// function handleCardImageClick(evt) {
+//   handleImageClick(evt);
+// }
 
-
-
-const popupEdit = document.querySelector('.popup_type_edit'); 
-const popupAddCard = document.querySelector('.popup_type_new-card'); 
-const popupImage = document.querySelector('.popup_type_image'); 
-
-const popupClose = document.querySelector('.popup__close'); 
 const cardsContainer = document.querySelector('.places__list');
 const profileName = document.getElementById('name'); 
 const profileJob = document.getElementById('job');
-
 const inputName = document.getElementById('inputName'); 
-const inputJob = document.getElementById('inputJob'); 
-const popup = document.querySelector('.popup');
+const inputJob = document.getElementById('inputJob');
 const formElement = profilePopup.querySelector('.popup__form'); 
 
 //modals
@@ -45,29 +32,13 @@ const imageModal = document.querySelector('.popup_type_image');
 
 //open modal buttons 
 const openEditModalButton= document.querySelector('.profile__edit-button');
-const openAddCardModalButton= document.querySelector('.profile__add-button');
-
-//modal buttons 
-const closeEditModalButton= editModal.querySelector('.popup__close');
-const closeAddCardModalButton= addCardModal.querySelector('.popup__close');
-const closeImageModalButton= imageModal.querySelector('.popup__close');
-
-//popup добавления фоток 
-const popupAdd = document.querySelector('.popup-add'); 
+const openAddCardModalButton= document.querySelector('.profile__add-button'); 
 const formElementAdd = document.querySelector('#popup-add__form'); 
-const showImageAdd = document.querySelector('.profile__add'); 
-
-
-
-
 
 initialCards.forEach((item) => {
-  const cardData = createCard(item, deleteCard);
+  const cardData = createCard(item, deleteCard, openCardImage);
   addCard(cardData);
 })
-
-
-// редактирование профиля 
 
 formElement.addEventListener('submit', function(evt) { 
   evt.preventDefault(); 
@@ -81,21 +52,19 @@ formElement.addEventListener('submit', function(evt) {
 
 formElementAdd.addEventListener('submit', function(ev) { 
   ev.preventDefault(); 
-  closeModal(addCardModal); 
- 
-  const nameInput = document.querySelector('#name');
-  const linkInput = document.querySelector('#link');
+  closeModal(addCardModal);  
+  
   const cardData = createCard({name: nameInput.value, link: linkInput.value, alt: linkInput.alt}, deleteCard);
   addCard(cardData);
   formElementAdd.reset(); 
 });
 
-const popupList = Array.from(document.querySelectorAll('.popup')); // найдем все попапы на странице
+const popupList = Array.from(document.querySelectorAll('.popup')); 
 
-popupList.forEach((popup) => { // итерируем массив. объявляя каждый попап в переменную popup
-  popup.addEventListener('mouseup', (event) => { // на каждый попап устанавливаем слушателя события
-    const targetClassList = event.target.classList; // запишем в переменную класс элемента, на котором произошло событие
-    if (targetClassList.contains('popup') || targetClassList.contains('popup__close')) { // проверяем наличие класса попапа ИЛИ кнопки закрытия
+popupList.forEach((popup) => { 
+  popup.addEventListener('mouseup', (event) => { 
+    const targetClassList = event.target.classList; 
+    if (targetClassList.contains('popup') || targetClassList.contains('popup__close')) { 
       closeModal(popup);
     }
   })
@@ -117,4 +86,18 @@ function addCard(cardData) {
   cardsContainer.prepend(cardData);
 }
 
-export{cardsContainer, handleCardImageClick};
+// функция popup для карточек в index.js???
+const cardTemplate = document.querySelector('#card-template').content;
+const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+const cardImage = cardElement.querySelector('.popup__image');
+const cardType = cardElement.querySelector('.popup_type_image');
+
+function openCardImage(data){
+  cardType.src = data.link;  
+  cardImage.alt = data.name;  
+  cardDiscription.textContent = data.name;
+    
+  openModal(cardType);
+}
+
+export{cardsContainer};
