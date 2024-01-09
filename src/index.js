@@ -6,18 +6,7 @@ import {createCard, deleteCard} from './components/card';
 const nameInput = document.querySelector('#name');
 const linkInput = document.querySelector('#link');
 const profilePopup = document.querySelector('.profile-popup');
-const popupImgPic = document.querySelector('.popup__image');
 const popupImgText = document.querySelector('.popup__caption');
-const handleImageClick = (evt) => {
-  popupImgPic.src = evt.target.src;
-  popupImgText.textContent = evt.target.alt;
-  openPopup(imageModal);
-} 
-
-// function handleCardImageClick(evt) {
-//   handleImageClick(evt);
-// }
-
 const cardsContainer = document.querySelector('.places__list');
 const profileName = document.getElementById('name'); 
 const profileJob = document.getElementById('job');
@@ -28,17 +17,15 @@ const formElement = profilePopup.querySelector('.popup__form');
 //modals
 const editModal = document.querySelector('.popup_type_edit'); 
 const addCardModal = document.querySelector('.popup_type_new-card');
-const imageModal = document.querySelector('.popup_type_image');
+
 
 //open modal buttons 
 const openEditModalButton= document.querySelector('.profile__edit-button');
 const openAddCardModalButton= document.querySelector('.profile__add-button'); 
 const formElementAdd = document.querySelector('#popup-add__form'); 
-
-initialCards.forEach((item) => {
-  const cardData = createCard(item, deleteCard, openCardImage);
-  addCard(cardData);
-})
+const popupList = Array.from(document.querySelectorAll('.popup')); 
+const cardImage = document.querySelector('.popup__image');
+const cardType = document.querySelector('.popup_type_image');
 
 formElement.addEventListener('submit', function(evt) { 
   evt.preventDefault(); 
@@ -59,8 +46,6 @@ formElementAdd.addEventListener('submit', function(ev) {
   formElementAdd.reset(); 
 });
 
-const popupList = Array.from(document.querySelectorAll('.popup')); 
-
 popupList.forEach((popup) => { 
   popup.addEventListener('mouseup', (event) => { 
     const targetClassList = event.target.classList; 
@@ -69,6 +54,15 @@ popupList.forEach((popup) => {
     }
   })
 })
+
+// open photo
+function openCardImage(data){
+  cardImage.src = data.link;  
+  cardImage.alt = data.name;  
+  popupImgText.textContent = data.name;
+    
+  openPopup(cardType);
+}
 
 //профиль
 openEditModalButton.addEventListener('click', () => { 
@@ -86,18 +80,9 @@ function addCard(cardData) {
   cardsContainer.prepend(cardData);
 }
 
-// функция popup для карточек в index.js???
-const cardTemplate = document.querySelector('#card-template').content;
-const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-const cardImage = cardElement.querySelector('.popup__image');
-const cardType = cardElement.querySelector('.popup_type_image');
-
-function openCardImage(data){
-  cardType.src = data.link;  
-  cardImage.alt = data.name;  
-  cardDiscription.textContent = data.name;
-    
-  openModal(cardType);
-}
+initialCards.forEach((item) => {
+  const cardData = createCard(item, deleteCard, openCardImage);
+  addCard(cardData);
+})
 
 export{cardsContainer};
