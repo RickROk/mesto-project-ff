@@ -1,7 +1,7 @@
 const cardTemplate = document.querySelector('#card-template').content;
 
-function handleLikeButtonClick(event) {
-  event.target.classList.toggle('card__like-button_is-active');
+function handleLikeButtonClick(evt) {
+  evt.target.classList.toggle('card__like-button_is-active');
 }
 
 function createCard(cardData, onDelete, openCardImage) {
@@ -16,7 +16,7 @@ function createCard(cardData, onDelete, openCardImage) {
   deleteButton.addEventListener('click', onDelete);
 
   const listItemLike = cardElement.querySelector('.card__like-button');
-  listItemLike.addEventListener('click', () => handleLikeButtonClick(event));
+  listItemLike.addEventListener('click', (evt) => handleLikeButtonClick(evt));
   
   cardImage.addEventListener('click', () => openCardImage(cardData));  
 
@@ -27,5 +27,4 @@ function deleteCard(event) {
   const cardListItem = event.target.closest('.card');
   cardListItem.remove();
 }
-
 export {createCard, deleteCard};
